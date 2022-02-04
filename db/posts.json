@@ -8,5 +8,10 @@
         "id": 2,
         "authorID": 2,
         "text": "Thanks <@1>"
+    },
+    {
+        "id": 3,
+        "authorID": 1,
+        "text": "You are welcome"
     }
 ]

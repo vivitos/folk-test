@@ -24,4 +24,21 @@ describe('Get post with mentions', () => {
       .get('/post/test')
       .expect(HttpStatus.BAD_REQUEST);
   });
+
+  it('should return 404 when post id is not defined', () => {
+    return request(app.getHttpServer())
+      .get('/post/1234')
+      .expect(HttpStatus.NOT_FOUND);
+  });
+
+  it('should return mentions when post got at least one', async () => {
+    const { body } = await request(app.getHttpServer()).get('/post/1');
+    expect(body.mentions).toHaveLength(1);
+  });
+
+  it('should return post even without mentions', async () => {
+    const { body } = await request(app.getHttpServer()).get('/post/3');
+    expect(body.mentions).not.toBeDefined();
+    expect(body.text).toBeDefined();
+  });
 });

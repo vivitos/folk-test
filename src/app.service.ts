@@ -13,9 +13,11 @@ export class AppService {
   private static readonly REGEX_EXTRACT = /<@|>/g;
 
   // Extract user id from post text
-  private getMentionsFromPost(text: string): number[] {
+  private getMentionsFromPost(text: string): number[] | null {
     // First we get all mentions
     const extractedMentions = text.match(AppService.REGEX_MATCH);
+
+    if (!extractedMentions) return null;
 
     // Then, we extract only mentions that can be parsed as integer
     const mentionnedUserIDs = extractedMentions.reduce((acc, extract) => {
@@ -59,7 +61,7 @@ export class AppService {
     const rawMentions = this.getMentionsFromPost(post.text);
 
     // If there are no mentions we can send it back to user
-    if (!rawMentions.length) {
+    if (!rawMentions?.length) {
       this.logger.log('Return getPostWithMentions');
       return {
         id: post.id,
