@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "authorID": 1,
+        "text": "Hello <@2>"
+    },
+    {
+        "id": 2,
+        "authorID": 2,
+        "text": "Thanks <@1>"
+    }
+]
